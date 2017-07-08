@@ -1,0 +1,22 @@
+#div1 {
+    background-color:red ;
+    margin:20px;
+    height: 100px;
+    width:100px;
+    transform: translate(50px, 100px);
+    transition: width 1s, background-color 1s;
+}
+@keyframes godown {
+    to{
+        height: 200px;
+    }
+    form {
+        height:100px;
+    }
+}
+#div1:hover{
+    background-color: blue;
+    width: 130px;
+    /*transition: width 1s, background-color 1s;*/
+    animation: godown 1s;
+}
