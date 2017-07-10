@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var div1 = document.getElementById("mydiv");
+        var div2;
+        window.onload = function () {
+            div2 = document.getElementById("mydiv");
+            var btn = document.getElementById("print");
+            var text = document.getElementById("name");
+            btn.onclick = function () {
+              //  window.alert("Hello " + text.value );
+
+            }
+        }
+    </script>
+</head>
+<body>
+<form>
+    <input type="text" id="name">
+    <button id="print">Add List</button>
+</form>
+
+</body>
+</html>

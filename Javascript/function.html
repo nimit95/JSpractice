@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+       // fun1();
+        //fun2();
+        func1();
+        func2();
+        var fun1 = function() {
+            console.log("fun1");
+            //fun2();
+        } ;
+        var fun2 = function() {
+            console.log("fun2");
+            fun1();
+        };
+        function func1() {
+            console.log("func1");
+        }
+        function func2() {
+            console.log("func2")
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
