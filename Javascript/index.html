@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div id="myDiv">
+
+</div>
+<ul id="list">
+
+</ul>
+</body>
+<script>
+    var time = (new Date()).getTime();
+    list = document.getElementById("list");
+    var contents ="";
+    for(i=1;i<=100000;i++) {
+        var j="";
+        if(i%3==0){
+            j = "fizz";
+        }
+        if(i%5==0) {
+            j += "buzz";
+
+        }
+        if(j=="")
+            j = i;
+        contents += "<li>"+j+"</li>";
+
+    }
+    list.innerHTML = contents;
+   console.log((new Date()).getTime()-time);
+</script>
+</html>
