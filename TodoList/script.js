@@ -19,25 +19,37 @@ function refreshtodo(){
     retrieveArr();
     setArrToList(list,itemArr);
 }
-function addItem(list, index, todoText) {
-    var text = todoText;
+function addItem(list, index, todoObj) {
     var todoItem = document.createElement("li");
-    todoItem.innerHTML = text;
+    todoItem.innerHTML = todoObj.todoText;
     todoItem.setAttribute("data-id",index);
+    if(todoObj.done) {
+        todoItem.style.textDecoration = 'line-through';
+    }
     list.appendChild(todoItem);
-    todoItem.addEventListener('click',deleteAndSave);
+    todoItem.addEventListener('click',strikeAndSave );
+}
+function strikeAndSave(event) {
+    var index = event.target.getAttribute("data-id");
+    console.log('delete-' + index);
+    itemArr[index].done = !itemArr[index].done ;
+    saveaTodo();
+    refreshtodo();
 }
 function deleteAndSave(event) {
     var index = event.target.getAttribute("data-id");
     console.log('delete-' + index);
     itemArr.splice(index,1);
-    localStorage.setItem('todolist', itemArr.join(','));
+    saveaTodo();
     refreshtodo();
+}
+function saveaTodo(){
+    localStorage.setItem('todolist', JSON.stringify(itemArr))
 }
 function retrieveArr() {
     var str = localStorage.getItem('todolist');
     if(str)
-        itemArr = str.split(',');
+        itemArr = JSON.parse(str);
 }
 function setArrToList(list,itemArray) {
     list.innerHTML = "";
@@ -45,6 +57,9 @@ function setArrToList(list,itemArray) {
         addItem(list, index,itemArray[index]);
 }
 function addAndSave(todoText) {
-    itemArr.push(todoText);
-    localStorage.setItem('todolist', itemArr.join(','))
+    itemArr.push({
+        todoText:todoText,
+        done:false
+    });
+    saveaTodo();
 }
