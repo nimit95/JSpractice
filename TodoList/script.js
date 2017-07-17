@@ -1,7 +1,7 @@
 /**
  * Created by nimit on 16/7/17.
  */
-let itemArr = [];
+var itemArr = [];
 // color change and line through in done and move to last
 // color change on list hover
 window.onload = function () {
@@ -68,6 +68,8 @@ function moveUp(event) {
     if(index===null)
         index = event.target.parentElement.parentElement.getAttribute("data-id");
     let temp = itemArr[index];
+    if(index-1<0)
+        return;
     itemArr[index] = itemArr[index-1];
     itemArr[index-1] = temp;
     console.log(index);
@@ -79,12 +81,15 @@ function moveDown(event) {
     // console.log('up',event.target.parentElement.parentElement.parentElement.getAttribute("data-id"));
     if(index===null)
         index = event.target.parentElement.parentElement.getAttribute("data-id");
+    if(+(index)+1>=itemArr.length)
+        return;
     let temp = itemArr[index];
-    itemArr[index] = itemArr[index+1];
-    itemArr[index+1] = temp;
+
+    itemArr[index] = itemArr[+(index)+1];
+    itemArr[+(index)+1] = temp;
     console.log(index);
-    //saveaTodo();
-    //refreshtodo();
+    saveaTodo();
+    refreshtodo();
 }
 function strikeAndSave(event) {
     let index = event.target.parentElement.parentElement.getAttribute("data-id");
