@@ -4,12 +4,46 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <style>
+        #listItem{
+            width: 500px;
+            height:35px;
+            padding: 5px;
+        }
+
+        #list {
+            margin-top: 20px;
+        }
+        #li:last-child{
+            background-color: cyan;
+        }
+        #task{
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-<input type="text" id="listItem">
-<button id="add">ADD TO LIST</button>
-<ol id="list">
+<div class="text-center" id="task">
+    <input type="text" id="listItem"  class=".form-inline" class="form-control col-lg-4"
+           aria-describedby="New Task" placeholder="Add New Task">
+    <button id="add" class="btn btn-success"><img src="ic_add_white_18px.svg"></button>
+    <button id="clear" class="btn btn-danger"><img src="ic_delete_black_18px.svg"></button>
+</div>
+<ul id="list">
 
-</ol>
+</ul>
+
+</label>
 </body>
 </html>

@@ -1,65 +1,126 @@
 /**
  * Created by nimit on 16/7/17.
  */
-var itemArr = [];
+let itemArr = [];
+// color change and line through in done and move to last
+// color change on list hover
 window.onload = function () {
 
-    var todoText = document.getElementById("listItem");
-    var addBtn = document.getElementById("add");
-    var list = document.getElementById("list");
+    let todoText = document.getElementById("listItem");
+    let addBtn = document.getElementById("add");
+    let list = document.getElementById("list");
+    let clear = document.getElementById('clear');
     refreshtodo();
     addBtn.onclick = function () {
-
-      addAndSave(todoText.value);
-      refreshtodo();
+        if (todoText.value === "") {
+            window.alert('No text');
+        }
+        else {
+            addAndSave(todoText.value);
+            refreshtodo();
+            todoText.value = "";
+        }
     };
-
+    clear.onclick = function () {
+        console.log('sind');
+        itemArr = itemArr.filter(function (item) {
+            return !item.done
+        });
+        saveaTodo();
+        refreshtodo();
+    }
 };
-function refreshtodo(){
+function refreshtodo() {
     retrieveArr();
-    setArrToList(list,itemArr);
+    setArrToList(list, itemArr);
 }
 function addItem(list, index, todoObj) {
-    var todoItem = document.createElement("li");
-    todoItem.innerHTML = todoObj.todoText;
-    todoItem.setAttribute("data-id",index);
-    if(todoObj.done) {
+    let todoItem = document.createElement("li");
+    let data = '<label class="custom-control custom-checkbox" >' +
+        '<input type="checkbox" class="custom-control-input"  ' + (todoObj.done ? 'checked' : '') + '> ' +
+        '<span class="custom-control-indicator"></span>' +
+        '<span class="custom-control-description">' + todoObj.todoText + '</span>' +
+        '</label>'
+        + `<div class="btn-group" role="group" aria-label="Basic example" class="pull-right">
+        <button type="button" id="moveUp" class="btn btn-secondary"><img src="ic_keyboard_arrow_up_black_18px.svg"></button>
+        <button type="button" id="moveDown" class="btn btn-secondary"><img src="ic_keyboard_arrow_down_black_18px.svg"></button>
+        <button type="button"  class="btn btn-secondary"><img src="ic_close_black_18px.svg"></button>
+        </div>`;
+
+    todoItem.innerHTML = data;
+    todoItem.setAttribute("data-id", index);
+    todoItem.setAttribute("class", 'list-group-item');
+    if (todoObj.done) {
         todoItem.style.textDecoration = 'line-through';
     }
+
     list.appendChild(todoItem);
-    todoItem.addEventListener('click',strikeAndSave );
+    todoItem.children[0].children[0].addEventListener('click', strikeAndSave);
+  //  console.log(todoItem.children[1].children[0]);
+    todoItem.children[1].children[0].addEventListener('click', moveUp);
+   // console.log(todoItem.children[1].children[1]);
+    todoItem.children[1].children[1].addEventListener('click', moveDown);
+    todoItem.children[1].children[2].addEventListener('click', deleteAndSave);
+}
+function moveUp(event) {
+    let index = event.target.parentElement.parentElement.parentElement.getAttribute("data-id");
+   // console.log('up',event.target.parentElement.parentElement.parentElement.getAttribute("data-id"));
+    if(index===null)
+        index = event.target.parentElement.parentElement.getAttribute("data-id");
+    let temp = itemArr[index];
+    itemArr[index] = itemArr[index-1];
+    itemArr[index-1] = temp;
+    console.log(index);
+    saveaTodo();
+    refreshtodo();
+}
+function moveDown(event) {
+    let index = event.target.parentElement.parentElement.parentElement.getAttribute("data-id");
+    // console.log('up',event.target.parentElement.parentElement.parentElement.getAttribute("data-id"));
+    if(index===null)
+        index = event.target.parentElement.parentElement.getAttribute("data-id");
+    let temp = itemArr[index];
+    itemArr[index] = itemArr[index+1];
+    itemArr[index+1] = temp;
+    console.log(index);
+    //saveaTodo();
+    //refreshtodo();
 }
 function strikeAndSave(event) {
-    var index = event.target.getAttribute("data-id");
-    console.log('delete-' + index);
-    itemArr[index].done = !itemArr[index].done ;
+    let index = event.target.parentElement.parentElement.getAttribute("data-id");
+    console.log('delete-' + event.target.id);
+
+    itemArr[index].done = !(itemArr[index].done);
+    
     saveaTodo();
     refreshtodo();
 }
 function deleteAndSave(event) {
-    var index = event.target.getAttribute("data-id");
+    let index = event.target.parentElement.parentElement.parentElement.getAttribute("data-id");
+    if(index===null)
+        index = event.target.parentElement.parentElement.getAttribute("data-id");
     console.log('delete-' + index);
-    itemArr.splice(index,1);
+    itemArr.splice(index, 1);
     saveaTodo();
     refreshtodo();
 }
-function saveaTodo(){
+function saveaTodo() {
     localStorage.setItem('todolist', JSON.stringify(itemArr))
 }
 function retrieveArr() {
-    var str = localStorage.getItem('todolist');
-    if(str)
+    let str = localStorage.getItem('todolist');
+    if (str)
         itemArr = JSON.parse(str);
 }
-function setArrToList(list,itemArray) {
+function setArrToList(list, itemArray) {
     list.innerHTML = "";
-    for(var index in itemArray)
-        addItem(list, index,itemArray[index]);
+    for (let index in itemArray)
+        addItem(list, index, itemArray[index]);
 }
 function addAndSave(todoText) {
     itemArr.push({
-        todoText:todoText,
-        done:false
+        todoText: todoText,
+        done: false
     });
     saveaTodo();
 }
