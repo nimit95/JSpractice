@@ -10,6 +10,7 @@ window.onload = function () {
     let addBtn = document.getElementById("add");
     let list = document.getElementById("list");
     let clear = document.getElementById('clear');
+
     refreshtodo();
     addBtn.onclick = function () {
         if (todoText.value === "") {
@@ -31,36 +32,87 @@ window.onload = function () {
     }
 };
 function refreshtodo() {
+
     retrieveArr();
     setArrToList(list, itemArr);
 }
 function addItem(list, index, todoObj) {
     let todoItem = document.createElement("li");
-    let data = '<label class="custom-control custom-checkbox" >' +
-        '<input type="checkbox" class="custom-control-input"  ' + (todoObj.done ? 'checked' : '') + '> ' +
-        '<span class="custom-control-indicator"></span>' +
-        '<span class="custom-control-description">' + todoObj.todoText + '</span>' +
-        '</label>'
-        + `<div class="btn-group" role="group" aria-label="Basic example" class="pull-right">
-        <button type="button" id="moveUp" class="btn btn-secondary"><img src="ic_keyboard_arrow_up_black_18px.svg"></button>
-        <button type="button" id="moveDown" class="btn btn-secondary"><img src="ic_keyboard_arrow_down_black_18px.svg"></button>
-        <button type="button"  class="btn btn-secondary"><img src="ic_close_black_18px.svg"></button>
-        </div>`;
-
-    todoItem.innerHTML = data;
     todoItem.setAttribute("data-id", index);
-    todoItem.setAttribute("class", 'list-group-item');
+    todoItem.className =  'list-group-item';
+
+    let todoLabel = document.createElement("label");
+    todoLabel.className = 'custom-control custom-checkbox';
+
+    let checkbox = document.createElement('input');
+    checkbox.setAttribute('type','checkbox');
+    checkbox.className = 'custom-control-input';
+    checkbox.addEventListener('change', strikeAndSave);
+
+    let span = document.createElement('span');
+    span.className = 'custom-control-indicator';
+
+    let todoText = document.createElement('span');
+    todoText.className = 'custom-control-description';
+    todoText.innerHTML = todoObj.todoText;
+
+    let buttonGroup = document.createElement('div');
+    buttonGroup.className = 'btn-group';
+    buttonGroup.setAttribute('role','group');
+    buttonGroup.setAttribute('aria-label','Todo text');
+
+    let buttonUp = document.createElement('button');
+    buttonUp.idName = 'moveUp';
+    buttonUp.className = 'btn btn-secondary';
+    buttonUp.addEventListener('click', moveUp);
+
+    let buttonDown = document.createElement('button');
+    buttonDown.idName = 'moveDown';
+    buttonDown.className = 'btn btn-secondary';
+    buttonDown.addEventListener('click', moveDown);
+
+
+    let buttonDel = document.createElement('button');
+    buttonDel.className = 'btn btn-secondary';
+    buttonDel.addEventListener('click', deleteAndSave);
+
+    let imageUp = createImageTag(document,'ic_keyboard_arrow_up_black_18px.svg');
+    let imageDown = createImageTag(document,'ic_keyboard_arrow_down_black_18px.svg');
+    let imageDel = createImageTag(document,'ic_close_black_18px.svg');
+
     if (todoObj.done) {
         todoItem.style.textDecoration = 'line-through';
+        todoItem.style.color ='#999';
+        checkbox.setAttribute('checked', 'true');
     }
 
+    buttonUp.append(imageUp);
+    buttonDown.append(imageDown);
+    buttonDel.append(imageDel);
+
+    todoLabel.appendChild(checkbox);
+    todoLabel.appendChild(span);
+    todoLabel.appendChild(todoText);
+
+    buttonGroup.appendChild(buttonUp);
+    buttonGroup.appendChild(buttonDown);
+    buttonGroup.appendChild(buttonDel);
+
+    todoItem.appendChild(todoLabel);
+    todoItem.appendChild(buttonGroup);
+
     list.appendChild(todoItem);
-    todoItem.children[0].children[0].addEventListener('click', strikeAndSave);
+
   //  console.log(todoItem.children[1].children[0]);
-    todoItem.children[1].children[0].addEventListener('click', moveUp);
+
    // console.log(todoItem.children[1].children[1]);
-    todoItem.children[1].children[1].addEventListener('click', moveDown);
-    todoItem.children[1].children[2].addEventListener('click', deleteAndSave);
+
+
+}
+function createImageTag(document,link) {
+    let image = document.createElement('img');
+    image.setAttribute('src',link);
+    return image;
 }
 function moveUp(event) {
     let index = event.target.parentElement.parentElement.parentElement.getAttribute("data-id");
@@ -113,14 +165,18 @@ function saveaTodo() {
     localStorage.setItem('todolist', JSON.stringify(itemArr))
 }
 function retrieveArr() {
+
     let str = localStorage.getItem('todolist');
     if (str)
         itemArr = JSON.parse(str);
 }
 function setArrToList(list, itemArray) {
     list.innerHTML = "";
-    for (let index in itemArray)
+
+    for (let index in itemArray) {
+        console.log(itemArray);
         addItem(list, index, itemArray[index]);
+    }
 }
 function addAndSave(todoText) {
     itemArr.push({

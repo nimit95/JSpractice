@@ -16,34 +16,61 @@
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
     <style>
-        #listItem{
+        body{
+            background-color: #F5F3EE;
+        }
+        #listItem {
             width: 500px;
-            height:35px;
+            height: 35px;
+
             padding: 5px;
         }
 
         #list {
             margin-top: 20px;
+
         }
-        #li:last-child{
-            background-color: cyan;
+        .list-group-item{
+            background-color: #ffffff;
         }
-        #task{
+        li:first-child #moveUp {
+            visibility: hidden;
+        }
+
+        li:last-child #moveDown {
+            visibility: hidden;
+        }
+
+        .row {
             margin-top: 40px;
+        }
+        .btn-group{
+            float: right;
         }
     </style>
 </head>
 <body>
-<div class="text-center" id="task">
-    <input type="text" id="listItem"  class=".form-inline" class="form-control col-lg-4"
-           aria-describedby="New Task" placeholder="Add New Task">
-    <button id="add" class="btn btn-success"><img src="ic_add_white_18px.svg"></button>
-    <button id="clear" class="btn btn-danger"><img src="ic_delete_black_18px.svg"></button>
+<div class="container">
+    <div class="row" id="input-row">
+        <div class="col">
+            <input type="text" id="listItem" class=".form-inline"
+                   aria-describedby="New Task" placeholder="Add New Task">
+        </div>
+        <div class="col-2">
+            <button id="add" class="btn btn-success"><img src="ic_add_white_18px.svg"></button>
+        </div>
+
+        <div class="col-2">
+            <button id="clear" class="btn btn-danger"><img src="ic_delete_black_18px.svg"></button>
+        </div>
+    </div>
+    <div class="row">
+        <div id="todolist-container" class="col-11  ">
+            <ul id="list">
+
+            </ul>
+        </div>
+    </div>
 </div>
-<ul id="list">
-
-</ul>
-
-</label>
 </body>
 </html>
