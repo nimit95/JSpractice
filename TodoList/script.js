@@ -62,12 +62,12 @@ function addItem(list, index, todoObj) {
     buttonGroup.setAttribute('aria-label','Todo text');
 
     let buttonUp = document.createElement('button');
-    buttonUp.idName = 'moveUp';
+    buttonUp.id = 'moveUp';
     buttonUp.className = 'btn btn-secondary';
     buttonUp.addEventListener('click', moveUp);
 
     let buttonDown = document.createElement('button');
-    buttonDown.idName = 'moveDown';
+    buttonDown.id = 'moveDown';
     buttonDown.className = 'btn btn-secondary';
     buttonDown.addEventListener('click', moveDown);
 
