@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.2.1.js"></script>
+    <script src="TodoListjQuery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <style>
+        body{
+            background-color: #F5F3EE;
+        }
+        #listItem {
+            width: 500px;
+            height: 35px;
+
+            padding: 5px;
+        }
+
+        #list {
+            margin-top: 20px;
+
+        }
+        .list-group-item{
+            background-color: #ffffff;
+        }
+        li:first-child #moveUp {
+            visibility: hidden;
+        }
+
+        li:last-child #moveDown {
+            visibility: hidden;
+        }
+
+        .row {
+            margin-top: 40px;
+        }
+        .btn-group{
+            float: right;
+        }
+        .img{
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row" id="input-row">
+        <div class="col">
+            <input type="text" id="listItem" class=".form-inline"
+                   aria-describedby="New Task" placeholder="Add New Task">
+        </div>
+        <div class="col-2">
+            <button id="add" class="btn btn-success"><img src="img/ic_add_white_18px.svg"></button>
+        </div>
+
+        <div class="col-2">
+            <button id="clear" class="btn btn-danger"><img src="img/ic_delete_black_18px.svg"></button>
+        </div>
+    </div>
+    <div class="row">
+        <div id="todolist-container" class="col-12">
+            <ul id="list">
+
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

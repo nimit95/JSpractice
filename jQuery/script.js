@@ -57,7 +57,7 @@ function addItem(list, index, todoObj) {
     todoText.innerHTML = todoObj.todoText;
 
     let buttonGroup = document.createElement('div');
-        buttonGroup.className = 'btn-group';
+    buttonGroup.className = 'btn-group';
     buttonGroup.setAttribute('role','group');
     buttonGroup.setAttribute('aria-label','Todo text');
 
