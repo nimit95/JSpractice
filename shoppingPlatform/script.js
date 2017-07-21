@@ -4,7 +4,7 @@ var prices = [100,200,300,400,500,600,700];
 var prodname = [];
 
 function fillName() {
-    for(var i=0;i<6;i++) {
+    for(var i=0;i<7;i++) {
 
         prodname.push("Product " + i);
 
@@ -41,7 +41,9 @@ function addToCart(ev){
     saveProducts();
 }
 function increaseQty(id){
-    var result = $.grep(products, function(e){ return e.id === id; });
+    var result = $.grep(products, function (e) {
+        return e.id === id;
+    });
     if(result.length===0) {
         products.push(new addProduct(id,prodname[id],prices[id],1));
     }

@@ -14,12 +14,24 @@
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
     <script src="cartscript.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+<h1>Cart</h1>
+<div class="row">
+    <a class="btn btn-primary btn-lg btn-block" href="index.html">Go Back To Catalog</a>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered" id="cart">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -29,7 +41,7 @@
                     <th>Amount</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="cart">
                 <tr>
                     <th scope="row">1</th>
                     <td>sample product</td>
