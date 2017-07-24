@@ -1,16 +1,10 @@
 var a = true;
-
-setTimeout(function () {
-    a = false;
-}, 0);
-
-for(var i=10;i>=0;i--)
-{
-
+function msdk(){
+    console.log("chalga");
 }
-var odsm = "dsdsd";
-while(a) {
-    
-}
+setTimeout(msdk, 200);
 
-console.log("hello");
+function sd(){
+    console.log("chalga2");
+}
+setTimeout(sd, 100);

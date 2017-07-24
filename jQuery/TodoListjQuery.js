@@ -33,7 +33,7 @@ function addTodo(todoText) {
 function showTodo() {
     if(todos.length===0)
         return;
-    todoList.empty();
+        todoList.empty();
     for (var i in todos) {
         let todoItem = createTodoListItem(i, todos[i]);
         todoList.append(todoItem);
