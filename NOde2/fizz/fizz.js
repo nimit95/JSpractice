@@ -1,11 +1,11 @@
 
 
 const fs = require('fs');
-
+var ans;
 fs.readFile(__dirname+'/num.txt',function(err,data){
     if(err) throw err;
-    let input = data.toString().split('\n');
-    var ans = "";
+    let input = data.toString().split(/\r?\n/ );
+    ans = "";
     for(var i of input) {
         if(+i%3===0)
             ans += 'fizz';
@@ -15,5 +15,13 @@ fs.readFile(__dirname+'/num.txt',function(err,data){
             ans+= i;
         ans+= '\n';
     }
-    console.log(ans);
+    writeToFile();
 });
+
+function writeToFile() {
+    fs.writeFile(__dirname+'/output.txt', ans, function (err) {
+        if (err) throw err;
+
+        console.log('All done!');
+    });
+}

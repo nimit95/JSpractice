@@ -1,0 +1,9 @@
+fizz
+1
+34
+67
+43
+fizzbuzz
+fizzbuzz
+23
+34
