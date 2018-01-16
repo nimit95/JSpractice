@@ -10,4 +10,3 @@ var func2 = () => {
 console.log(module.exports === this);
 func2.call(global);  //  arrow function has this as that of the place from which it is called
                     // also called lexical scope
-

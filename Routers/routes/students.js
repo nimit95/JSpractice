@@ -13,7 +13,6 @@ route.get('/', (req, res) => {
 });
 
 route.get('/:id', (req, res) => {
-    console.log(req.params.id);
     res.send(students[req.params.id - 1]);
 });
 
